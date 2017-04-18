@@ -52,12 +52,13 @@ Several combinations of hyperparameter of SVM were tried to obtain the best perf
 
 ###Sliding Window Search
 
-#### a sliding window search.  How did you decide what scales to search and how much to overlap windows?
-The code for sliding window search is contained in the **"Sliding Window Search"** code cell of this [Jupyter notebook](./SelfDrvingVehicleDetection.ipynb).
+#### window scales and overlap ratio selection 
+The code for sliding window search is contained in the **"Sliding Window Search"** code cell of this [Jupyter notebook](./SelfDrvingVehicleDetection.ipynb). The Y-direction search region was set to start from 400 to avoid mismatch since the lane is only available at the bottom half of the image. Several combinations of sliding window size and overlap ratio was tested. Below shows a test result with different widow size and overlap ratio. 
 
-I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
 
-![alt text][image3]
+![sliding_window_64](./output_images/sliding_window_64.png)
+
+Based on the test image result, I decided to chose the sliding window size of 64 and 128 with overlap ratio of 0.75 as my serach parameters.
 
 ####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
