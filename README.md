@@ -47,8 +47,8 @@ Various combinations of HOG parameters in different color space were tested and 
 `YCrCb` color space, which I think can differentiate between car and not car image most.
 
 ####3. Classifier training using HOG features.
-
-A linear SVM using...
+The feature vectors of vehicle/non vehicle were extracted and splitted to training set and testing set with a ratio of 8:2. 
+Several combinations of hyperparameter of SVM were tried to obtain the best performance. A SVM classifier with `rbf` kernal and `C = 10` was prepared. The test accuracy is 0.9916. The code for this step is contained in the **"SVM Classfier Trainning"** code cell of this [Jupyter notebook](./SelfDrvingVehicleDetection.ipynb). 
 
 ###Sliding Window Search
 
