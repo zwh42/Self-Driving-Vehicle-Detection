@@ -52,7 +52,8 @@ Several combinations of hyperparameter of SVM were tried to obtain the best perf
 
 ###Sliding Window Search
 
-####1. Describe how (and identify where in your code) you implemented a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+#### a sliding window search.  How did you decide what scales to search and how much to overlap windows?
+The code for sliding window search is contained in the **"Sliding Window Search"** code cell of this [Jupyter notebook](./SelfDrvingVehicleDetection.ipynb).
 
 I decided to search random window positions at random scales all over the image and came up with this (ok just kidding I didn't actually ;):
 
