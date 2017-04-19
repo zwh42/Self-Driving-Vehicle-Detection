@@ -36,14 +36,16 @@ The flow was started by reading in all the `vehicle` and `non-vehicle` images.  
 
 I then explored different color spaces and different `skimage.hog()` parameters (`orientations`, `pixels_per_cell`, and `cells_per_block`).  I grabbed random images from each of the two classes and displayed them to get a feel for what the `skimage.hog()` output looks like.
 
-Here is an example using the `YCrCb` color space, in `Y` color channel and HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
+Here are examples using the `YCrCb` color space, in `Y` color channel and "HLS" color space in "L" channel,  with HOG parameters of `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)`:
 
 
-![hog_param](./output_images/color_space_and_hog_parameter_selection.png)
+![hog_param](./output_images/color_space_and_hog_parameter_selection_YCrCb_Y.png)
+![hog_param](./output_images/color_space_and_hog_parameter_selection_HLS_L.png)
+
 
 ####2. Final Choice of HOG parameters.
 
-Various combinations of HOG parameters in different color space were tested and my final choice of HOG parameter combination is `orientations=8`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)` in in `Y` color channel of 
+Various combinations of HOG parameters in different color space were tested and my final choice of HOG parameter combination is `orientations=9`, `pixels_per_cell=(8, 8)` and `cells_per_block=(2, 2)` in in `Y` color channel of 
 `YCrCb` color space, which I think can differentiate between car and not car image most.
 
 ####3. Classifier training using HOG features.
