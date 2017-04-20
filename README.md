@@ -55,41 +55,34 @@ Several combinations of hyperparameter of SVM were tried to obtain the best perf
 ###Sliding Window Search
 
 #### window scales and overlap ratio selection 
-The code for sliding window search is contained in the **"Sliding Window Search"** code cell of this [Jupyter notebook](./SelfDrvingVehicleDetection.ipynb). The Y-direction search region was set to start from 400 to avoid mismatch since the lane is only available at the bottom half of the image. Several combinations of sliding window size and overlap ratio was tested. Below shows a test result with different widow size and overlap ratio. 
+The code for sliding window search is contained in the **"Sliding Window Search"** code cell of this [Jupyter notebook](./SelfDrvingVehicleDetection.ipynb). The Y-direction search region was set to start from 400 to avoid mismatch since the lane is only available at the bottom half of the image. Several combinations of sliding window size (32, 64, 96, 128) and overlap ratio (0.5, 0.75) was tested. Below shows a test result with different widow size and overlap ratio. 
 
 
-![sliding_window_64](./output_images/sliding_window_64.png)
 
-Based on the test image result, I decided to chose the sliding window size of 64 and 128 with overlap ratio of 0.75 as my serach parameters.
 
-####2. Show some examples of test images to demonstrate how your pipeline is working.  What did you do to optimize the performance of your classifier?
 
-Ultimately I searched on two scales using YCrCb 3-channel HOG features plus spatially binned color and histograms of color in the feature vector, which provided a nice result.  Here are some example images:
+Based on the test image result, I decided to chose the sliding window scale of 64, 96 and 128 with overlap ratio of 0.75 as my serach parameters.
 
-![alt text][image4]
----
+
+
+Ultimately I searched on 3 scales (64, 96, 128) using HLS color space's L channel HOG features , which provided a reasonable result. Here are some example images:
+
+![sliding_window_64](./output_images/sliding_window_96_0.75.png)
+
 
 ### Video Implementation
 
-####1. Provide a link to your final video output.  Your pipeline should perform reasonably well on the entire project video (somewhat wobbly or unstable bounding boxes are ok as long as you are identifying the vehicles most of the time with minimal false positives.)
-Here's a [link to my video result](./project_video.mp4)
+####1. a link to your final video output.
+Here's a [link to my video result](./processed_project_video_3.mp4)
 
 
-####2. Describe how (and identify where in your code) you implemented some kind of filter for false positives and some method for combining overlapping bounding boxes.
+####2.filter for false positives filter and combining overlapping bounding boxes.
 
-I recorded the positions of positive detections in each frame of the video.  From the positive detections I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
+ I created a heatmap and then thresholded that map to identify vehicle positions.  I then used `scipy.ndimage.measurements.label()` to identify individual blobs in the heatmap.  I then assumed each blob corresponded to a vehicle.  I constructed bounding boxes to cover the area of each blob detected.  
 
-Here's an example result showing the heatmap from a series of frames of video, the result of `scipy.ndimage.measurements.label()` and the bounding boxes then overlaid on the last frame of video:
+Here's an example result showing the original sliding window, the heatmap and the final result of the bounding boxes.
 
-### Here are six frames and their corresponding heatmaps:
-
-![alt text][image5]
-
-### Here is the output of `scipy.ndimage.measurements.label()` on the integrated heatmap from all six frames:
-![alt text][image6]
-
-### Here the resulting bounding boxes are drawn onto the last frame in the series:
-![alt text][image7]
+![sliding_window_64](./output_images/false_positive_filter.png)
 
 
 
@@ -97,7 +90,9 @@ Here's an example result showing the heatmap from a series of frames of video, t
 
 ###Discussion
 
-####1. Briefly discuss any problems / issues you faced in your implementation of this project.  Where will your pipeline likely fail?  What could you do to make it more robust?
+From the video result we can see that some of the car were not captured properly and the bounding box didn't cover all the area of the car. It seems the feature selection were not selected very well. One major issue is when I tried to add spatial and color features the training process will increase by a margin. So did the in the video processing phase. In the future, fine-tuning on the feature selection is need.
 
-Here I'll talk about the approach I took, what techniques I used, what worked and why, where the pipeline might fail and how I might improve it if I were going to pursue this project further.  
+Besides, we can find the car in the center region of the video, which is generally small, is not captured in current implantation. This is because the current scale of the sliding window is larger than the car. However, reduce the sliding window scale will also result in longer run time.
+
+ 
 
